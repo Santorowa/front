@@ -26,7 +26,7 @@ const Page = () => {
   const formik = useFormik({
     initialValues: {
       id: 'santorowa',
-      password: '1234',
+      password: '12345',
       submit: null
     },
     validationSchema: Yup.object({
