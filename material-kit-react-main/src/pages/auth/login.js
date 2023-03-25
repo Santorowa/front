@@ -22,19 +22,19 @@ import { Layout as AuthLayout } from 'src/layouts/auth/layout';
 const Page = () => {
   const router = useRouter();
   const auth = useAuth();
-  const [method, setMethod] = useState('email');
+  const [method, setMethod] = useState('id');
   const formik = useFormik({
     initialValues: {
-      email: 'demo@devias.io',
-      password: 'Password123!',
+      id: 'santorowa',
+      password: '1234',
       submit: null
     },
     validationSchema: Yup.object({
-      email: Yup
+      id: Yup
         .string()
-        .email('Must be a valid email')
+        .id('Must be a valid id')
         .max(255)
-        .required('Email is required'),
+        .required('Id is required'),
       password: Yup
         .string()
         .max(255)
@@ -42,7 +42,7 @@ const Page = () => {
     }),
     onSubmit: async (values, helpers) => {
       try {
-        await auth.signIn(values.email, values.password);
+        await auth.signIn(values.id, values.password);
         router.push('/');
       } catch (err) {
         helpers.setStatus({ success: false });
@@ -121,30 +121,30 @@ const Page = () => {
               value={method}
             >
               <Tab
-                label="Email"
-                value="email"
+                label="Id"
+                value="id"
               />
               <Tab
                 label="Phone Number"
                 value="phoneNumber"
               />
             </Tabs>
-            {method === 'email' && (
+            {method === 'id' && (
               <form
                 noValidate
                 onSubmit={formik.handleSubmit}
               >
                 <Stack spacing={3}>
                   <TextField
-                    error={!!(formik.touched.email && formik.errors.email)}
+                    error={!!(formik.touched.id && formik.errors.id)}
                     fullWidth
-                    helperText={formik.touched.email && formik.errors.email}
-                    label="Email Address"
-                    name="email"
+                    helperText={formik.touched.id && formik.errors.id}
+                    label="Id"
+                    name="id"
                     onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
-                    type="email"
-                    value={formik.values.email}
+                    type="text"
+                    value={formik.values.id}
                   />
                   <TextField
                     error={!!(formik.touched.password && formik.errors.password)}
@@ -158,9 +158,9 @@ const Page = () => {
                     value={formik.values.password}
                   />
                 </Stack>
-                <FormHelperText sx={{ mt: 1 }}>
+                {/* <FormHelperText sx={{ mt: 1 }}>
                   Optionally you can skip.
-                </FormHelperText>
+                </FormHelperText> */}
                 {formik.errors.submit && (
                   <Typography
                     color="error"
