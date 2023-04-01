@@ -3,6 +3,8 @@ import ComputerDesktopIcon from "@heroicons/react/24/solid/ComputerDesktopIcon";
 import DeviceTabletIcon from "@heroicons/react/24/solid/DeviceTabletIcon";
 import PhoneIcon from "@heroicons/react/24/solid/PhoneIcon";
 import AbcOutlinedIcon from "@mui/icons-material/AbcOutlined";
+import AlarmIcon from "@mui/icons-material/Alarm";
+import AirlineStopsIcon from "@mui/icons-material/AirlineStops";
 import {
   Box,
   Card,
@@ -22,7 +24,12 @@ const useChartOptions = (labels) => {
     chart: {
       background: "transparent",
     },
-    colors: [theme.palette.primary.main, theme.palette.success.main, theme.palette.warning.main],
+    colors: [
+      theme.palette.primary.main,
+      theme.palette.success.main,
+      theme.palette.warning.main,
+      theme.palette.success.main,
+    ],
     dataLabels: {
       enabled: false,
     },
@@ -77,7 +84,7 @@ const iconMap = {
   ),
   "H/C": (
     <SvgIcon>
-      <AbcOutlinedIcon />
+      <AlarmIcon />
     </SvgIcon>
   ),
 };
