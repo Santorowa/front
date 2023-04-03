@@ -19,13 +19,13 @@ import { Scrollbar } from "src/components/scrollbar";
 import { SeverityPill } from "src/components/severity-pill";
 
 const statusMap = {
-  pending: "warning",
-  delivered: "success",
-  refunded: "error",
+  working: "error",
+  waiting: "success",
+  reservation: "warning",
 };
 
 export const OverviewLatestOrders = (props) => {
-  const { orders = [], sx } = props;
+  const { datas = [], sx } = props;
 
   return (
     <Card sx={sx}>
@@ -35,24 +35,28 @@ export const OverviewLatestOrders = (props) => {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Order</TableCell>
-                <TableCell>Customer</TableCell>
-                <TableCell sortDirection="desc">Date</TableCell>
-                <TableCell>Status</TableCell>
+                <TableCell sx={{ textAlign: "center" }}>이름</TableCell>
+                <TableCell sx={{ textAlign: "center" }}>투입 장소</TableCell>
+                <TableCell sx={{ textAlign: "center" }}>작업</TableCell>
+                <TableCell sx={{ textAlign: "center" }}>현재 상태</TableCell>
+                <TableCell sx={{ textAlign: "center" }} sortDirection="desc">
+                  Updated Date
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {orders.map((order) => {
-                const createdAt = format(order.createdAt, "dd/MM/yyyy");
+              {datas.map((data) => {
+                const createdAt = format(data.createdAt, "yyyy-MM-dd");
 
                 return (
-                  <TableRow hover key={order.id}>
-                    <TableCell>{order.ref}</TableCell>
-                    <TableCell>{order.customer.name}</TableCell>
-                    <TableCell>{createdAt}</TableCell>
-                    <TableCell>
-                      <SeverityPill color={statusMap[order.status]}>{order.status}</SeverityPill>
+                  <TableRow hover key={data.id}>
+                    <TableCell sx={{ textAlign: "center" }}>{data.name}</TableCell>
+                    <TableCell sx={{ textAlign: "center" }}>{data.location}</TableCell>
+                    <TableCell sx={{ textAlign: "center" }}>{data.task}</TableCell>
+                    <TableCell sx={{ textAlign: "center" }}>
+                      <SeverityPill color={statusMap[data.status]}>{data.status}</SeverityPill>
                     </TableCell>
+                    <TableCell sx={{ textAlign: "center" }}>{createdAt}</TableCell>
                   </TableRow>
                 );
               })}
@@ -80,6 +84,6 @@ export const OverviewLatestOrders = (props) => {
 };
 
 OverviewLatestOrders.prototype = {
-  orders: PropTypes.array,
+  datas: PropTypes.array,
   sx: PropTypes.object,
 };

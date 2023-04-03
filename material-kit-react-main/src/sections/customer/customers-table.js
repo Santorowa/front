@@ -19,6 +19,7 @@ import {
 } from "@mui/material";
 import { Scrollbar } from "src/components/scrollbar";
 import { getInitials } from "src/utils/get-initials";
+import { SeverityPill } from "src/components/severity-pill";
 
 const theme = unstable_createMuiStrictModeTheme();
 
@@ -44,19 +45,11 @@ const colorMap = (grade) => {
   return color;
 };
 
-// const longtext = () => {
-//   return (
-//     <>
-//       <br />
-//       1차 가공:
-//       <br />
-//       HOOD:
-//       <br />
-//       <br />
-//       <em>123</em>
-//     </>
-//   );
-// };
+const statusMap = {
+  working: "error",
+  waiting: "success",
+  reservation: "warning",
+};
 
 export const CustomersTable = (props) => {
   const {
@@ -104,6 +97,7 @@ export const CustomersTable = (props) => {
                 <TableCell sx={{ textAlign: "center" }}>주소</TableCell>
                 <TableCell sx={{ textAlign: "center" }}>소속 회사</TableCell>
                 <TableCell sx={{ textAlign: "center" }}>입사일</TableCell>
+                <TableCell sx={{ textAlign: "center" }}>현재 상태</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -158,6 +152,7 @@ export const CustomersTable = (props) => {
                     <ThemeProvider theme={theme}>
                       <Tooltip
                         title={detailGrade}
+                        placement="right"
                         componentsProps={{
                           tooltip: {
                             sx: {
@@ -178,6 +173,9 @@ export const CustomersTable = (props) => {
                     </TableCell>
                     <TableCell sx={{ textAlign: "center" }}>{data.company}</TableCell>
                     <TableCell sx={{ textAlign: "center" }}>{createdAt}</TableCell>
+                    <TableCell sx={{ textAlign: "center" }}>
+                      <SeverityPill color={statusMap[data.status]}>{data.status}</SeverityPill>
+                    </TableCell>
                   </TableRow>
                 );
               })}

@@ -1,6 +1,7 @@
 import MagnifyingGlassIcon from "@heroicons/react/24/solid/MagnifyingGlassIcon";
 import PlusIcon from "@heroicons/react/24/solid/PlusIcon";
 import { Button, Card, InputAdornment, OutlinedInput, SvgIcon, TextField } from "@mui/material";
+import { Box, Stack } from "@mui/system";
 
 const searchType = [
   {
@@ -104,6 +105,26 @@ const sort = [
     label: "숙련도 순",
   },
 ];
+
+const state = [
+  {
+    value: "전체",
+    label: "",
+  },
+  {
+    value: "투입 중",
+    label: "투입 중",
+  },
+  {
+    value: "투입 예정",
+    label: "투입 예정",
+  },
+  {
+    value: "대기 중",
+    label: "대기 중",
+  },
+];
+
 export const CustomersSearch = () => (
   <Card sx={{ p: 2 }}>
     <TextField
@@ -115,7 +136,7 @@ export const CustomersSearch = () => (
       select
       SelectProps={{ native: true }}
       // value={values.state}
-      sx={{ width: "25%", pr: 1, pb: 1 }}
+      sx={{ width: "20%", pr: 1, pb: 1 }}
     >
       {position.map((option) => (
         <option key={option.value} value={option.value}>
@@ -132,7 +153,7 @@ export const CustomersSearch = () => (
       select
       SelectProps={{ native: true }}
       // value={values.state}
-      sx={{ width: "25%", pr: 1 }}
+      sx={{ width: "20%", pr: 1 }}
     >
       {task.map((option) => (
         <option key={option.value} value={option.value}>
@@ -149,7 +170,7 @@ export const CustomersSearch = () => (
       select
       SelectProps={{ native: true }}
       // value={values.state}
-      sx={{ width: "25%", pr: 1 }}
+      sx={{ width: "20%", pr: 1 }}
     >
       {grade.map((option) => (
         <option key={option.value} value={option.value}>
@@ -166,7 +187,7 @@ export const CustomersSearch = () => (
       select
       SelectProps={{ native: true }}
       // value={values.state}
-      sx={{ width: "25%" }}
+      sx={{ width: "20%", pr: 1 }}
     >
       {sort.map((option) => (
         <option key={option.value} value={option.value}>
@@ -174,45 +195,67 @@ export const CustomersSearch = () => (
         </option>
       ))}
     </TextField>
-
     <TextField
-      sx={{ width: "10%", pr: 1 }}
       fullWidth
       // variant="outlined"
-      label="Search-Type"
+      label="state"
       name="state"
       // onChange={handleChange}
-      required
       select
       SelectProps={{ native: true }}
       // value={values.state}
+      sx={{ width: "20%" }}
     >
-      {searchType.map((option) => (
+      {state.map((option) => (
         <option key={option.value} value={option.value}>
           {option.label}
         </option>
       ))}
     </TextField>
-    <OutlinedInput
-      defaultValue=""
-      fullWidth
-      placeholder="Search employee"
-      startAdornment={
-        <InputAdornment position="start">
-          <SvgIcon color="action" fontSize="small">
+    <Stack alignItems="center" direction="row" spacing={5}>
+      <Stack alignItems="center" direction="row" spacing={0} sx={{ width: "100%" }}>
+        <TextField
+          sx={{ width: "10%", pr: 1 }}
+          fullWidth
+          // variant="outlined"
+          label="Search-Type"
+          name="state"
+          // onChange={handleChange}
+          required
+          select
+          SelectProps={{ native: true }}
+          // value={values.state}
+        >
+          {searchType.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </TextField>
+        <OutlinedInput
+          defaultValue=""
+          fullWidth
+          placeholder="Search employee"
+          startAdornment={
+            <InputAdornment position="start">
+              <SvgIcon color="action" fontSize="small">
+                <MagnifyingGlassIcon />
+              </SvgIcon>
+            </InputAdornment>
+          }
+          sx={{ maxWidth: "40%" }}
+        />
+      </Stack>
+
+      <Button
+        size="small"
+        startIcon={
+          <SvgIcon fontSize="small">
             <MagnifyingGlassIcon />
           </SvgIcon>
-        </InputAdornment>
-      }
-      sx={{ maxWidth: "40%" }}
-    />
-    <Button
-      startIcon={
-        <SvgIcon fontSize="small">
-          <MagnifyingGlassIcon />
-        </SvgIcon>
-      }
-      variant="contained"
-    ></Button>
+        }
+        variant="contained"
+      ></Button>
+    </Stack>
   </Card>
 );

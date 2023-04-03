@@ -34,6 +34,7 @@ const data = [
     email: "ycn0127@naver.com",
     phone: "010-5283-6780",
     company: "Co. Santo",
+    status: "working",
   },
   {
     id: "2",
@@ -55,6 +56,7 @@ const data = [
     email: "inee1995@naver.com",
     phone: "010-9356-9469",
     company: "Co. Santo",
+    status: "waiting",
   },
   {
     id: "3",
@@ -76,6 +78,7 @@ const data = [
     email: "trashAlchol@naver.com",
     phone: "010-1234-1234",
     company: "Co. Santo",
+    status: "reservation",
   },
 ];
 
