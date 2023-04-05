@@ -23,7 +23,6 @@ export const OverviewBudget = (props) => {
         const response = await axios.get(
           "https://newsapi.org/v2/top-headlines?country=kr&category=technology&apiKey=96b878cf3d334289bf4fd4cc43b93cee"
         );
-        console.log(response);
         setArticles(response.data.articles);
       } catch (e) {
         console.log(e);
@@ -32,6 +31,8 @@ export const OverviewBudget = (props) => {
     };
     fetchData();
   }, []);
+
+  console.log(articles);
 
   // 대기 중일 때
   if (loading) {

@@ -57,34 +57,39 @@ const Page = () => (
             <OverviewLatestProducts
               products={[
                 {
-                  id: "5ece2c077e39da27658aa8a9",
+                  id: "1",
                   image: "/assets/products/product-1.png",
                   name: "HOOD",
                   updatedAt: subHours(now, 6).getTime(),
+                  progress: "100",
                 },
                 {
-                  id: "5ece2c0d16f70bff2cf86cd8",
+                  id: "2",
                   image: "/assets/products/product-2.png",
                   name: "CLAMP",
                   updatedAt: subDays(subHours(now, 8), 2).getTime(),
+                  progress: "80",
                 },
                 {
-                  id: "b393ce1b09c1254c3a92c827",
+                  id: "3",
                   image: "/assets/products/product-5.png",
                   name: "H/C",
                   updatedAt: subDays(subHours(now, 1), 1).getTime(),
+                  progress: "60",
                 },
                 {
-                  id: "a6ede15670da63f49f752c89",
+                  id: "4",
                   image: "/assets/products/product-6.png",
                   name: "PLAD",
                   updatedAt: subDays(subHours(now, 3), 3).getTime(),
+                  progress: "100",
                 },
                 {
-                  id: "bcad5524fe3a2f8f8620ceda",
+                  id: "5",
                   image: "/assets/products/product-7.png",
                   name: "Healthcare Ritual",
                   updatedAt: subDays(subHours(now, 5), 6).getTime(),
+                  progress: "10",
                 },
               ]}
               sx={{ height: "100%" }}

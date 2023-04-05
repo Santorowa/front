@@ -17,6 +17,7 @@ export const items = [
         <ChartBarIcon />
       </SvgIcon>
     ),
+    subMenu: false,
   },
   {
     title: "직원",
@@ -26,6 +27,19 @@ export const items = [
         <UsersIcon />
       </SvgIcon>
     ),
+    extends: true,
+    subMenu: true,
+    // subMenuInfo: ["직원 목록", "직원 등록"],
+    subMenuInfo: [
+      {
+        subTitle: "직원 목록",
+        subPath: "/customers",
+      },
+      {
+        subTitle: "직원 등록",
+        subPath: "/companies",
+      },
+    ],
   },
   {
     title: "작업 가이드",
@@ -35,6 +49,7 @@ export const items = [
         <ShoppingBagIcon />
       </SvgIcon>
     ),
+    subMenu: false,
   },
   {
     title: "Account",
@@ -44,6 +59,7 @@ export const items = [
         <UserIcon />
       </SvgIcon>
     ),
+    subMenu: false,
   },
   {
     title: "Settings",
@@ -62,6 +78,7 @@ export const items = [
         <LockClosedIcon />
       </SvgIcon>
     ),
+    subMenu: false,
   },
   {
     title: "Register",
@@ -71,6 +88,7 @@ export const items = [
         <UserPlusIcon />
       </SvgIcon>
     ),
+    subMenu: false,
   },
   {
     title: "Error",
@@ -80,5 +98,6 @@ export const items = [
         <XCircleIcon />
       </SvgIcon>
     ),
+    subMenu: false,
   },
 ];

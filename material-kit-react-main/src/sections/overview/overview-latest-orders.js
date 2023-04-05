@@ -17,6 +17,7 @@ import {
 } from "@mui/material";
 import { Scrollbar } from "src/components/scrollbar";
 import { SeverityPill } from "src/components/severity-pill";
+import ArrowPathIcon from "@heroicons/react/24/solid/ArrowPathIcon";
 
 const statusMap = {
   working: "error",
@@ -24,12 +25,30 @@ const statusMap = {
   reservation: "warning",
 };
 
+const onClick = () => {};
+
 export const OverviewLatestOrders = (props) => {
   const { datas = [], sx } = props;
 
   return (
     <Card sx={sx}>
-      <CardHeader title="작업자 현황" />
+      <CardHeader
+        title="작업자 현황"
+        action={
+          <Button
+            color="inherit"
+            size="small"
+            startIcon={
+              <SvgIcon fontSize="small">
+                <ArrowPathIcon />
+              </SvgIcon>
+            }
+          >
+            Sync
+          </Button>
+        }
+      />
+
       <Scrollbar sx={{ flexGrow: 1 }}>
         <Box sx={{ minWidth: 800 }}>
           <Table>
@@ -75,6 +94,7 @@ export const OverviewLatestOrders = (props) => {
           }
           size="small"
           variant="text"
+          onClick={onClick}
         >
           View all
         </Button>
