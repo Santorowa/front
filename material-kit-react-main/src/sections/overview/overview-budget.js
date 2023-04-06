@@ -32,8 +32,6 @@ export const OverviewBudget = (props) => {
     fetchData();
   }, []);
 
-  console.log(articles);
-
   // 대기 중일 때
   if (loading) {
     return "대기 중";

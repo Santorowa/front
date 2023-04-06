@@ -2,26 +2,17 @@ import NextLink from "next/link";
 import PropTypes from "prop-types";
 import { Box, ButtonBase, SvgIcon } from "@mui/material";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import ShoppingBagIcon from "@heroicons/react/24/solid/ShoppingBagIcon";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 
 export const SideNavItem = (props) => {
+  const pathname = usePathname();
   const [mount, setMount] = useState(false);
-  const {
-    active = false,
-    disabled,
-    external,
-    icon,
-    path,
-    title,
-    subMenuInfo,
-    subMenu,
-    subActive,
-  } = props;
+  const { active = false, disabled, external, icon, path, title, subMenuInfo, subMenu } = props;
 
-  console.log(subMenuInfo);
-  const onClick = () => {
+  const onClickMainmenu = () => {
     if (subMenu) {
       setMount((mount) => !mount); // on,off 개념 boolean
     }
@@ -61,7 +52,7 @@ export const SideNavItem = (props) => {
           },
         }}
         {...(!subMenu && { ...linkProps })}
-        onClick={onClick}
+        onClick={onClickMainmenu}
       >
         {icon && (
           <Box
@@ -132,7 +123,7 @@ export const SideNavItem = (props) => {
                 <SvgIcon
                   fontSize="small"
                   sx={{
-                    ...(subActive && {
+                    ...(pathname === info.subPath && {
                       color: "primary.main",
                     }),
                     pt: 0.5,
@@ -153,7 +144,7 @@ export const SideNavItem = (props) => {
                   lineHeight: "24px",
                   // whiteSpace: "nowrap",
                   textAlign: "left",
-                  ...(subActive && {
+                  ...(pathname === info.subPath && {
                     color: "common.white",
                   }),
                   ...(disabled && {
