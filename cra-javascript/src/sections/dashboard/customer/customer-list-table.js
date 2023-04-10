@@ -1,7 +1,7 @@
-import numeral from 'numeral';
-import PropTypes from 'prop-types';
-import ArrowRightIcon from '@untitled-ui/icons-react/build/esm/ArrowRight';
-import Edit02Icon from '@untitled-ui/icons-react/build/esm/Edit02';
+import numeral from "numeral";
+import PropTypes from "prop-types";
+import ArrowRightIcon from "@untitled-ui/icons-react/build/esm/ArrowRight";
+import Edit02Icon from "@untitled-ui/icons-react/build/esm/Edit02";
 import {
   Avatar,
   Box,
@@ -17,12 +17,42 @@ import {
   TableHead,
   TablePagination,
   TableRow,
-  Typography
-} from '@mui/material';
-import { RouterLink } from 'src/components/router-link';
-import { Scrollbar } from 'src/components/scrollbar';
-import { paths } from 'src/paths';
-import { getInitials } from 'src/utils/get-initials';
+  Typography,
+} from "@mui/material";
+import { RouterLink } from "src/components/router-link";
+import { Scrollbar } from "src/components/scrollbar";
+import { paths } from "src/paths";
+import { getInitials } from "src/utils/get-initials";
+import { format } from "date-fns";
+import { SeverityPill } from "src/components/severity-pill";
+
+const colorMap = (grade) => {
+  let color;
+
+  if (grade == 100) {
+    color = "#e5cc80";
+  } else if (grade >= 99) {
+    color = "#e268a8";
+  } else if (grade >= 95) {
+    color = "#ff8000";
+  } else if (grade >= 75) {
+    color = "#a335ee";
+  } else if (grade >= 50) {
+    color = "#0070ff";
+  } else if (grade >= 25) {
+    color = "#1eff00";
+  } else {
+    color = "#666";
+  }
+
+  return color;
+};
+
+const statusMap = {
+  working: "error",
+  waiting: "success",
+  reservation: "warning",
+};
 
 export const CustomerListTable = (props) => {
   const {
@@ -30,38 +60,37 @@ export const CustomerListTable = (props) => {
     items = [],
     onDeselectAll,
     onDeselectOne,
-    onPageChange = () => { },
+    onPageChange = () => {},
     onRowsPerPageChange,
     onSelectAll,
     onSelectOne,
     page = 0,
     rowsPerPage = 0,
-    selected = []
+    selected = [],
   } = props;
 
-  const selectedSome = (selected.length > 0) && (selected.length < items.length);
-  const selectedAll = (items.length > 0) && (selected.length === items.length);
+  const selectedSome = selected.length > 0 && selected.length < items.length;
+  const selectedAll = items.length > 0 && selected.length === items.length;
   const enableBulkActions = selected.length > 0;
 
   return (
-    <Box sx={{ position: 'relative' }}>
+    <Box sx={{ position: "relative" }}>
       {enableBulkActions && (
         <Stack
           direction="row"
           spacing={2}
           sx={{
-            alignItems: 'center',
-            backgroundColor: (theme) => theme.palette.mode === 'dark'
-              ? 'neutral.800'
-              : 'neutral.50',
-            display: enableBulkActions ? 'flex' : 'none',
-            position: 'absolute',
+            alignItems: "center",
+            backgroundColor: (theme) =>
+              theme.palette.mode === "dark" ? "neutral.800" : "neutral.50",
+            display: enableBulkActions ? "flex" : "none",
+            position: "absolute",
             top: 0,
             left: 0,
-            width: '100%',
+            width: "100%",
             px: 2,
             py: 0.5,
-            zIndex: 10
+            zIndex: 10,
           }}
         >
           <Checkbox
@@ -75,16 +104,10 @@ export const CustomerListTable = (props) => {
               }
             }}
           />
-          <Button
-            color="inherit"
-            size="small"
-          >
+          <Button color="inherit" size="small">
             Delete
           </Button>
-          <Button
-            color="inherit"
-            size="small"
-          >
+          <Button color="inherit" size="small">
             Edit
           </Button>
         </Stack>
@@ -106,35 +129,27 @@ export const CustomerListTable = (props) => {
                   }}
                 />
               </TableCell>
-              <TableCell>
-                Name
-              </TableCell>
-              <TableCell>
-                Location
-              </TableCell>
-              <TableCell>
-                Orders
-              </TableCell>
-              <TableCell>
-                Spent
-              </TableCell>
-              <TableCell align="right">
-                Actions
-              </TableCell>
+              <TableCell sx={{ textAlign: "center" }}>회원번호</TableCell>
+              <TableCell sx={{ textAlign: "center" }}>이름/Email</TableCell>
+              <TableCell sx={{ textAlign: "center" }}>숙련도</TableCell>
+              <TableCell sx={{ textAlign: "center" }}>연락처</TableCell>
+              <TableCell sx={{ textAlign: "center" }}>주소</TableCell>
+              <TableCell sx={{ textAlign: "center" }}>소속 회사</TableCell>
+              <TableCell sx={{ textAlign: "center" }}>입사일</TableCell>
+              <TableCell sx={{ textAlign: "center" }}>현재 상태</TableCell>
+              <TableCell align="right">Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {items.map((customer) => {
               const isSelected = selected.includes(customer.id);
-              const location = `${customer.city}, ${customer.state}, ${customer.country}`;
-              const totalSpent = numeral(customer.totalSpent).format(`${customer.currency}0,0.00`);
-
+              const location = `${customer.city}, ${customer.state}, ${customer.street}, ${customer.etcAddress}`;
+              const totalSpent = numeral(customer.totalSpent).format(
+                `${customer.currency}0,0.00`
+              );
+              const createdAt = format(customer.createdAt, "yyyy/MM/dd");
               return (
-                <TableRow
-                  hover
-                  key={customer.id}
-                  selected={isSelected}
-                >
+                <TableRow hover key={customer.id} selected={isSelected}>
                   <TableCell padding="checkbox">
                     <Checkbox
                       checked={isSelected}
@@ -148,17 +163,14 @@ export const CustomerListTable = (props) => {
                       value={isSelected}
                     />
                   </TableCell>
+                  <TableCell>{customer.id}</TableCell>
                   <TableCell>
-                    <Stack
-                      alignItems="center"
-                      direction="row"
-                      spacing={1}
-                    >
+                    <Stack alignItems="center" direction="row" spacing={1}>
                       <Avatar
                         src={customer.avatar}
                         sx={{
                           height: 42,
-                          width: 42
+                          width: 42,
                         }}
                       >
                         {getInitials(customer.name)}
@@ -172,25 +184,33 @@ export const CustomerListTable = (props) => {
                         >
                           {customer.name}
                         </Link>
-                        <Typography
-                          color="text.secondary"
-                          variant="body2"
-                        >
+                        <Typography color="text.secondary" variant="body2">
                           {customer.email}
                         </Typography>
                       </div>
                     </Stack>
                   </TableCell>
-                  <TableCell>
-                    {location}
+                  <TableCell
+                    sx={{
+                      textAlign: "center",
+                      color: `${colorMap(customer.totalGrade)}`,
+                    }}
+                  >
+                    {customer.totalGrade}
                   </TableCell>
-                  <TableCell>
-                    {customer.totalOrders}
+                  <TableCell>{customer.phone}</TableCell>
+                  <TableCell>{location}</TableCell>
+                  <TableCell>{customer.company}</TableCell>
+                  {/* <TableCell>
+                    <Typography variant="subtitle2">{totalSpent}</Typography>
+                  </TableCell> */}
+                  <TableCell sx={{ textAlign: "center" }}>
+                    {createdAt}
                   </TableCell>
-                  <TableCell>
-                    <Typography variant="subtitle2">
-                      {totalSpent}
-                    </Typography>
+                  <TableCell sx={{ textAlign: "center" }}>
+                    <SeverityPill color={statusMap[customer.status]}>
+                      {customer.status}
+                    </SeverityPill>
                   </TableCell>
                   <TableCell align="right">
                     <IconButton
@@ -240,5 +260,5 @@ CustomerListTable.propTypes = {
   onSelectOne: PropTypes.func,
   page: PropTypes.number,
   rowsPerPage: PropTypes.number,
-  selected: PropTypes.array
+  selected: PropTypes.array,
 };
