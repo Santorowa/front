@@ -1,3 +1,4 @@
+import React, { useRef } from "react";
 import NextLink from "next/link";
 import { usePathname } from "next/navigation";
 import PropTypes from "prop-types";
@@ -22,6 +23,7 @@ export const SideNav = (props) => {
   const { open, onClose } = props;
   const pathname = usePathname();
   const lgUp = useMediaQuery((theme) => theme.breakpoints.up("lg"));
+  const subMenuRef = useRef();
 
   const content = (
     <Scrollbar
@@ -98,7 +100,10 @@ export const SideNav = (props) => {
             }}
           >
             {items.map((item) => {
-              const active = item.path ? pathname === item.path : false;
+              const active =
+                pathname.split("/").length < 2
+                  ? pathname.includes(item.path)
+                  : "/" + pathname.split("/")[1] === item.path;
 
               return (
                 <SideNavItem

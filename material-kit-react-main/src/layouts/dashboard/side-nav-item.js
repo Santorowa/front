@@ -95,68 +95,71 @@ export const SideNavItem = (props) => {
 
       {mount && (
         <>
-          {subMenuInfo.map((info) => (
-            <ButtonBase
-              key={info.subTitle}
-              href={info.subPath}
-              component={NextLink}
-              sx={{
-                alignItems: "center",
-                borderRadius: 1,
-                display: "flex",
-                justifyContent: "flex-start",
+          {subMenuInfo.map((info, index) => {
+            const subActive = path + info.subPath === pathname;
+            return (
+              <ButtonBase
+                key={info.subTitle}
+                href={path + info.subPath}
+                component={NextLink}
+                sx={{
+                  alignItems: "center",
+                  borderRadius: 1,
+                  display: "flex",
+                  justifyContent: "flex-start",
 
-                pl: "16px",
-                pr: "16px",
-                py: "6px",
-                textAlign: "left",
-                width: "100%",
+                  pl: "16px",
+                  pr: "16px",
+                  py: "6px",
+                  textAlign: "left",
+                  width: "100%",
 
-                "&:hover": {
-                  backgroundColor: "rgba(255, 255, 255, 0.04)",
-                },
-              }}
+                  "&:hover": {
+                    backgroundColor: "rgba(255, 255, 255, 0.04)",
+                  },
+                }}
 
-              // {...linkProps}
-            >
-              <Box sx={{ width: "17%" }}>
-                <SvgIcon
-                  fontSize="small"
+                // {...linkProps}
+              >
+                <Box sx={{ width: "17%" }}>
+                  <SvgIcon
+                    fontSize="small"
+                    sx={{
+                      ...(subActive && {
+                        color: "primary.main",
+                      }),
+                      pt: 0.5,
+                      pl: 1,
+                    }}
+                  >
+                    <FiberManualRecordIcon />
+                  </SvgIcon>
+                </Box>
+                <Box
+                  component="span"
                   sx={{
-                    ...(pathname === info.subPath && {
-                      color: "primary.main",
+                    color: "neutral.400",
+                    flexGrow: 1,
+                    fontFamily: (theme) => theme.typography.fontFamily,
+                    fontSize: 14,
+                    fontWeight: 600,
+                    lineHeight: "24px",
+                    // whiteSpace: "nowrap",
+                    textAlign: "left",
+                    ...(subActive && {
+                      color: "common.white",
                     }),
-                    pt: 0.5,
-                    pl: 1,
+                    ...(disabled && {
+                      color: "neutral.500",
+                    }),
+                    width: "70%",
                   }}
                 >
-                  <FiberManualRecordIcon />
-                </SvgIcon>
-              </Box>
-              <Box
-                component="span"
-                sx={{
-                  color: "neutral.400",
-                  flexGrow: 1,
-                  fontFamily: (theme) => theme.typography.fontFamily,
-                  fontSize: 14,
-                  fontWeight: 600,
-                  lineHeight: "24px",
-                  // whiteSpace: "nowrap",
-                  textAlign: "left",
-                  ...(pathname === info.subPath && {
-                    color: "common.white",
-                  }),
-                  ...(disabled && {
-                    color: "neutral.500",
-                  }),
-                  width: "70%",
-                }}
-              >
-                {info.subTitle}
-              </Box>
-            </ButtonBase>
-          ))}
+                  {info.subTitle}
+                </Box>
+              </ButtonBase>
+            );
+          })}
         </>
       )}
     </li>

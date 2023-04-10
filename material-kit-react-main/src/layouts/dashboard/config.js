@@ -29,7 +29,6 @@ export const items = [
     ),
     extends: true,
     subMenu: true,
-    // subMenuInfo: ["직원 목록", "직원 등록"],
     subMenuInfo: [
       {
         subTitle: "직원 목록",
@@ -38,6 +37,27 @@ export const items = [
       {
         subTitle: "직원 등록",
         subPath: "/companies",
+      },
+    ],
+  },
+  {
+    title: "직원 (path Test)",
+    path: "/employees",
+    icon: (
+      <SvgIcon fontSize="small">
+        <UsersIcon />
+      </SvgIcon>
+    ),
+    extends: true,
+    subMenu: true,
+    subMenuInfo: [
+      {
+        subTitle: "직원 목록",
+        subPath: "/list",
+      },
+      {
+        subTitle: "직원 등록",
+        subPath: "/regist",
       },
     ],
   },
