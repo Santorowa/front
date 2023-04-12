@@ -17,6 +17,7 @@ import {
   TableHead,
   TablePagination,
   TableRow,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import { RouterLink } from "src/components/router-link";
@@ -144,10 +145,32 @@ export const CustomerListTable = (props) => {
             {items.map((customer) => {
               const isSelected = selected.includes(customer.id);
               const location = `${customer.city}, ${customer.state}, ${customer.street}, ${customer.etcAddress}`;
-              const totalSpent = numeral(customer.totalSpent).format(
-                `${customer.currency}0,0.00`
-              );
               const createdAt = format(customer.createdAt, "yyyy/MM/dd");
+              const detailGrade = (
+                <>
+                  H/C:{" "}
+                  <span
+                    style={{ color: `${colorMap(customer.gradeDetail.HC)}` }}
+                  >
+                    {customer.gradeDetail.HC}
+                  </span>
+                  <br />
+                  HOOD:{" "}
+                  <span
+                    style={{ color: `${colorMap(customer.gradeDetail.HOOD)}` }}
+                  >
+                    {customer.gradeDetail.HOOD}
+                  </span>
+                  <br />
+                  CLAMP:{" "}
+                  <span
+                    style={{ color: `${colorMap(customer.gradeDetail.CLAMP)}` }}
+                  >
+                    {customer.gradeDetail.CLAMP}
+                  </span>
+                  <br />
+                </>
+              );
               return (
                 <TableRow hover key={customer.id} selected={isSelected}>
                   <TableCell padding="checkbox">
@@ -190,14 +213,27 @@ export const CustomerListTable = (props) => {
                       </div>
                     </Stack>
                   </TableCell>
-                  <TableCell
-                    sx={{
-                      textAlign: "center",
-                      color: `${colorMap(customer.totalGrade)}`,
+                  <Tooltip
+                    title={detailGrade}
+                    placement="right"
+                    componentsProps={{
+                      tooltip: {
+                        sx: {
+                          bgcolor: "#1F1F1F",
+                        },
+                      },
                     }}
                   >
-                    {customer.totalGrade}
-                  </TableCell>
+                    <TableCell
+                      sx={{
+                        textAlign: "center",
+                        color: `${colorMap(customer.totalGrade)}`,
+                      }}
+                    >
+                      {customer.totalGrade}
+                    </TableCell>
+                  </Tooltip>
+
                   <TableCell>{customer.phone}</TableCell>
                   <TableCell>{location}</TableCell>
                   <TableCell>{customer.company}</TableCell>

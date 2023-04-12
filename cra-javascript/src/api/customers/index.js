@@ -1,7 +1,7 @@
-import { applyPagination } from 'src/utils/apply-pagination';
-import { applySort } from 'src/utils/apply-sort';
-import { deepCopy } from 'src/utils/deep-copy';
-import { customer, customers, emails, invoices, logs } from './data';
+import { applyPagination } from "src/utils/apply-pagination";
+import { applySort } from "src/utils/apply-sort";
+import { deepCopy } from "src/utils/deep-copy";
+import { customer, customers, emails, invoices, logs } from "./data";
 
 class CustomersApi {
   getCustomers(request = {}) {
@@ -9,15 +9,19 @@ class CustomersApi {
 
     let data = deepCopy(customers);
     let count = data.length;
-
-    if (typeof filters !== 'undefined') {
+    console.log(data);
+    if (typeof filters !== "undefined") {
       data = data.filter((customer) => {
-        if (typeof filters.query !== 'undefined' && filters.query !== '') {
+        if (typeof filters.query !== "undefined" && filters.query !== "") {
           let queryMatched = false;
-          const properties = ['email', 'name'];
+          const properties = ["email", "name"];
 
           properties.forEach((property) => {
-            if ((customer[property]).toLowerCase().includes(filters.query.toLowerCase())) {
+            if (
+              customer[property]
+                .toLowerCase()
+                .includes(filters.query.toLowerCase())
+            ) {
               queryMatched = true;
             }
           });
@@ -27,19 +31,19 @@ class CustomersApi {
           }
         }
 
-        if (typeof filters.hasAcceptedMarketing !== 'undefined') {
+        if (typeof filters.hasAcceptedMarketing !== "undefined") {
           if (customer.hasAcceptedMarketing !== filters.hasAcceptedMarketing) {
             return false;
           }
         }
 
-        if (typeof filters.isProspect !== 'undefined') {
+        if (typeof filters.isProspect !== "undefined") {
           if (customer.isProspect !== filters.isProspect) {
             return false;
           }
         }
 
-        if (typeof filters.isReturning !== 'undefined') {
+        if (typeof filters.isReturning !== "undefined") {
           if (customer.isReturning !== filters.isReturning) {
             return false;
           }
@@ -50,17 +54,17 @@ class CustomersApi {
       count = data.length;
     }
 
-    if (typeof sortBy !== 'undefined' && typeof sortDir !== 'undefined') {
+    if (typeof sortBy !== "undefined" && typeof sortDir !== "undefined") {
       data = applySort(data, sortBy, sortDir);
     }
 
-    if (typeof page !== 'undefined' && typeof rowsPerPage !== 'undefined') {
+    if (typeof page !== "undefined" && typeof rowsPerPage !== "undefined") {
       data = applyPagination(data, page, rowsPerPage);
     }
 
     return Promise.resolve({
       data,
-      count
+      count,
     });
   }
 
