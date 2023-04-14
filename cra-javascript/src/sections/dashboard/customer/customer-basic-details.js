@@ -34,7 +34,6 @@ export const CustomerBasicDetails = (props) => {
       <PropertyList>
         <PropertyListItem divider label="Email" value={email} />
         <PropertyListItem divider label="Phone" value={phone} />
-        {/* <PropertyListItem divider label="Country" value={country} /> */}
         <PropertyListItem divider label="State/Region" value={state} />
         <PropertyListItem divider label="주소" value={address} />
         <PropertyListItem divider label="소속 회사" value={company} />

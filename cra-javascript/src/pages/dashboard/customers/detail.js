@@ -25,10 +25,10 @@ import { usePageView } from "src/hooks/use-page-view";
 import { paths } from "src/paths";
 import { CustomerBasicDetails } from "src/sections/dashboard/customer/customer-basic-details";
 import { CustomerDataManagement } from "src/sections/dashboard/customer/customer-data-management";
-import { CustomerEmailsSummary } from "src/sections/dashboard/customer/customer-emails-summary";
+import { EmployeeSmsKakaoSummary } from "src/sections/dashboard/customer/employee-sms-kakao-summary";
 import { CustomerInvoices } from "src/sections/dashboard/customer/customer-invoices";
 import { EmployeeGrade } from "src/sections/dashboard/customer/employee-grade";
-import { CustomerLogs } from "src/sections/dashboard/customer/customer-logs";
+import { EmployeeChangeLogs } from "src/sections/dashboard/customer/employee-change-logs";
 import { getInitials } from "src/utils/get-initials";
 
 const tabs = [
@@ -256,7 +256,7 @@ const Page = () => {
                         totalgrade={customer.totalGrade}
                         gradedetail={customer.gradeDetail}
                       />
-                      <CustomerEmailsSummary />
+                      <EmployeeSmsKakaoSummary />
                       <CustomerDataManagement />
                     </Stack>
                   </Grid>
@@ -266,7 +266,7 @@ const Page = () => {
             {currentTab === "taskLog" && (
               <CustomerInvoices invoices={invoices} />
             )}
-            {currentTab === "changeLog" && <CustomerLogs logs={logs} />}
+            {currentTab === "changeLog" && <EmployeeChangeLogs logs={logs} />}
           </Stack>
         </Container>
       </Box>

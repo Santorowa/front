@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { format, subDays, subHours, subMinutes } from 'date-fns';
-import Mail01Icon from '@untitled-ui/icons-react/build/esm/Mail01';
+import { useState } from "react";
+import { format, subDays, subHours, subMinutes } from "date-fns";
+import Mail01Icon from "@untitled-ui/icons-react/build/esm/Mail01";
 import {
   Box,
   Button,
@@ -14,28 +14,30 @@ import {
   TableCell,
   TableRow,
   TextField,
-  Typography
-} from '@mui/material';
+  Typography,
+} from "@mui/material";
 
 const now = new Date();
 
 const emails = [
   {
-    id: '5ece2ce3613486d95ffaea58',
+    id: "5ece2ce3613486d95ffaea58",
     createdAt: subDays(subHours(subMinutes(now, 34), 5), 3).getTime(),
-    description: 'Order confirmation'
+    type: "KAKAO",
+    description: "Order confirmation",
   },
   {
-    id: '5ece2ce8cebf7ad1d100c0cd',
+    id: "5ece2ce8cebf7ad1d100c0cd",
     createdAt: subDays(subHours(subMinutes(now, 49), 11), 4).getTime(),
-    description: 'Order confirmation'
-  }
+    type: "SMS",
+    description: "Order confirmation",
+  },
 ];
 
 const emailOptions = [
-  'Resend last invoice',
-  'Send password reset',
-  'Send verification'
+  "Resend last invoice",
+  "Send password reset",
+  "Send verification",
 ];
 
 export const DetailList4 = () => {
@@ -44,10 +46,9 @@ export const DetailList4 = () => {
   return (
     <Box
       sx={{
-        backgroundColor: (theme) => theme.palette.mode === 'dark'
-          ? 'neutral.800'
-          : 'neutral.100',
-        p: 3
+        backgroundColor: (theme) =>
+          theme.palette.mode === "dark" ? "neutral.800" : "neutral.100",
+        p: 3,
       }}
     >
       <Card>
@@ -64,21 +65,18 @@ export const DetailList4 = () => {
             variant="outlined"
           >
             {emailOptions.map((option) => (
-              <option
-                key={option}
-                value={option}
-              >
+              <option key={option} value={option}>
                 {option}
               </option>
             ))}
           </TextField>
           <Box sx={{ mt: 2 }}>
             <Button
-              startIcon={(
+              startIcon={
                 <SvgIcon>
                   <Mail01Icon />
                 </SvgIcon>
-              )}
+              }
               variant="contained"
             >
               Send email
@@ -88,7 +86,10 @@ export const DetailList4 = () => {
             <Table>
               <TableBody>
                 {emails.map((email) => {
-                  const createdAt = format(email.createdAt, 'dd/MM/yyyy | HH:mm');
+                  const createdAt = format(
+                    email.createdAt,
+                    "dd/MM/yyyy | HH:mm"
+                  );
 
                   return (
                     <TableRow key={email.id}>
@@ -97,9 +98,7 @@ export const DetailList4 = () => {
                           {email.description}
                         </Typography>
                       </TableCell>
-                      <TableCell>
-                        {createdAt}
-                      </TableCell>
+                      <TableCell>{createdAt}</TableCell>
                     </TableRow>
                   );
                 })}

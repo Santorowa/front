@@ -1,23 +1,23 @@
-import { Box, Button, Card, CardContent, CardHeader, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  CardHeader,
+  Typography,
+} from "@mui/material";
 
 export const CustomerDataManagement = (props) => (
   <Card {...props}>
-    <CardHeader title="Data Management" />
+    <CardHeader title="직원 관리" />
     <CardContent sx={{ pt: 0 }}>
-      <Button
-        color="error"
-        variant="outlined"
-      >
-        Delete Account
+      <Button color="error" variant="outlined">
+        회원 삭제
       </Button>
       <Box sx={{ mt: 1 }}>
-        <Typography
-          color="text.secondary"
-          variant="body2"
-        >
-          Remove this customer’s chart if he requested that, if not
-          please be aware that what has been deleted can never brought
-          back
+        <Typography color="text.secondary" variant="body2">
+          퇴사한 직원의 계정을 삭제할 경우 30일 이내에서만 복구가 가능합니다(이
+          부분 정책 결정)
         </Typography>
       </Box>
     </CardContent>

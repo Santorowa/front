@@ -2,8 +2,17 @@ import PropTypes from "prop-types";
 import { Box, ListItem, ListItemText, Typography } from "@mui/material";
 
 export const PropertyListItem = (props) => {
-  const { align, children, disableGutters, value, label, ...other } = props;
-  console.log(other);
+  const {
+    align,
+    children,
+    disableGutters,
+    value,
+    label,
+    otherStyle,
+    subcolor,
+    ...other
+  } = props;
+
   return (
     <ListItem
       sx={{
@@ -31,7 +40,7 @@ export const PropertyListItem = (props) => {
           >
             {children || (
               <Typography
-                // style={{ color: "#00adb5" }}
+                style={otherStyle ? { color: `${subcolor.color}` } : null}
                 color="text.secondary"
                 variant="body2"
               >

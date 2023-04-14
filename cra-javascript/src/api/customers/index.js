@@ -1,7 +1,7 @@
 import { applyPagination } from "src/utils/apply-pagination";
 import { applySort } from "src/utils/apply-sort";
 import { deepCopy } from "src/utils/deep-copy";
-import { customer, customers, emails, invoices, logs } from "./data";
+import { customer, customers, emails, invoices, logs, messages } from "./data";
 
 class CustomersApi {
   getCustomers(request = {}) {
@@ -82,6 +82,10 @@ class CustomersApi {
 
   getLogs(request) {
     return Promise.resolve(deepCopy(logs));
+  }
+
+  getMessages(request) {
+    return Promise.resolve(deepCopy(messages));
   }
 }
 

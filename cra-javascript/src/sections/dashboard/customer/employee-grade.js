@@ -7,9 +7,10 @@ import {
   Divider,
   useMediaQuery,
 } from "@mui/material";
+import { Box } from "@mui/system";
 import { PropertyList } from "src/components/property-list";
 import { PropertyListItem } from "src/components/property-list-item";
-import { SeverityPill } from "src/components/severity-pill";
+
 // color: `${colorMap(customer.totalgrade)}`,
 
 const colorMap = (grade) => {
@@ -37,44 +38,42 @@ const colorMap = (grade) => {
 export const EmployeeGrade = (props) => {
   const mdUp = useMediaQuery((theme) => theme.breakpoints.up("md"));
   const { totalgrade, gradedetail } = props;
-
   const align = mdUp ? "horizontal" : "vertical";
 
   // 작업 숙련도 테이블 조회하여 data setting -> 바인딩
 
   return (
     <Card {...props}>
-      <CardHeader title="작업 숙련도" />
+      <CardHeader title="작업 숙련도"></CardHeader>
       <>
         <PropertyList>
-          {/* 이부분을 map으로 축소 시켜볼것*/}
           <PropertyListItem
             align={align}
             divider
-            label="H/C"
-            subcolor="`${colorMap(gradedetail.HC)}`"
-            value={gradedetail.HC}
+            label="총점"
+            otherStyle
+            subcolor={{ color: `${colorMap(totalgrade)}` }}
+            value={totalgrade}
           ></PropertyListItem>
-          <PropertyListItem
-            align={align}
-            divider
-            label="HOOD"
-            value={gradedetail.HOOD}
-          />
-          <PropertyListItem
-            align={align}
-            divider
-            label="CLAMP"
-            value={gradedetail.CLAMP}
-          />
+          {Object.keys(gradedetail).map((key) => (
+            <PropertyListItem
+              key={key}
+              align={align}
+              divider
+              label={key}
+              otherStyle
+              subcolor={{ color: `${colorMap(gradedetail[key])}` }}
+              value={gradedetail[key]}
+            ></PropertyListItem>
+          ))}
         </PropertyList>
       </>
       <Divider />
       <CardActions sx={{ flexWrap: "wrap" }}>
-        <Button size="small" variant="outlined">
+        {/* <Button size="small" variant="outlined">
           Create Invoice
         </Button>
-        <Button size="small">Resend Due Invoices</Button>
+        <Button size="small">Resend Due Invoices</Button> */}
       </CardActions>
     </Card>
   );
