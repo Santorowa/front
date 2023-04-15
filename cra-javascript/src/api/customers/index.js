@@ -1,7 +1,15 @@
 import { applyPagination } from "src/utils/apply-pagination";
 import { applySort } from "src/utils/apply-sort";
 import { deepCopy } from "src/utils/deep-copy";
-import { customer, customers, emails, invoices, logs, messages } from "./data";
+import {
+  customer,
+  customers,
+  emails,
+  invoices,
+  logs,
+  messages,
+  taskLogs,
+} from "./data";
 
 class CustomersApi {
   getCustomers(request = {}) {
@@ -9,7 +17,7 @@ class CustomersApi {
 
     let data = deepCopy(customers);
     let count = data.length;
-    console.log(data);
+
     if (typeof filters !== "undefined") {
       data = data.filter((customer) => {
         if (typeof filters.query !== "undefined" && filters.query !== "") {
@@ -86,6 +94,10 @@ class CustomersApi {
 
   getMessages(request) {
     return Promise.resolve(deepCopy(messages));
+  }
+
+  getTaskLogs(request) {
+    return Promise.resolve(deepCopy(taskLogs));
   }
 }
 

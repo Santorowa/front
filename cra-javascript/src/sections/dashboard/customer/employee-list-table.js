@@ -1,4 +1,3 @@
-import numeral from "numeral";
 import PropTypes from "prop-types";
 import ArrowRightIcon from "@untitled-ui/icons-react/build/esm/ArrowRight";
 import Edit02Icon from "@untitled-ui/icons-react/build/esm/Edit02";
@@ -55,7 +54,7 @@ const statusMap = {
   reservation: "warning",
 };
 
-export const CustomerListTable = (props) => {
+export const EmployeeListTable = (props) => {
   const {
     count = 0,
     items = [],
@@ -287,7 +286,7 @@ export const CustomerListTable = (props) => {
   );
 };
 
-CustomerListTable.propTypes = {
+EmployeeListTable.propTypes = {
   count: PropTypes.number,
   items: PropTypes.array,
   onDeselectAll: PropTypes.func,

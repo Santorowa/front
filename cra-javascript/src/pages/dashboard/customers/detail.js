@@ -26,7 +26,7 @@ import { paths } from "src/paths";
 import { CustomerBasicDetails } from "src/sections/dashboard/customer/customer-basic-details";
 import { CustomerDataManagement } from "src/sections/dashboard/customer/customer-data-management";
 import { EmployeeSmsKakaoSummary } from "src/sections/dashboard/customer/employee-sms-kakao-summary";
-import { CustomerInvoices } from "src/sections/dashboard/customer/customer-invoices";
+import { EmployeeTaskLogs } from "src/sections/dashboard/customer/employee-task-logs";
 import { EmployeeGrade } from "src/sections/dashboard/customer/employee-grade";
 import { EmployeeChangeLogs } from "src/sections/dashboard/customer/employee-change-logs";
 import { getInitials } from "src/utils/get-initials";
@@ -64,13 +64,13 @@ const useCustomer = () => {
   return customer;
 };
 
-const useInvoices = () => {
+const useTaskLogs = () => {
   const isMounted = useMounted();
   const [invoices, setInvoices] = useState([]);
 
   const handleInvoicesGet = useCallback(async () => {
     try {
-      const response = await customersApi.getInvoices();
+      const response = await customersApi.getTaskLogs();
 
       if (isMounted()) {
         setInvoices(response);
@@ -121,7 +121,7 @@ const useLogs = () => {
 const Page = () => {
   const [currentTab, setCurrentTab] = useState("details");
   const customer = useCustomer();
-  const invoices = useInvoices();
+  const taskLogs = useTaskLogs();
   const logs = useLogs();
 
   usePageView();
@@ -264,7 +264,7 @@ const Page = () => {
               </div>
             )}
             {currentTab === "taskLog" && (
-              <CustomerInvoices invoices={invoices} />
+              <EmployeeTaskLogs taskLogs={taskLogs} />
             )}
             {currentTab === "changeLog" && <EmployeeChangeLogs logs={logs} />}
           </Stack>

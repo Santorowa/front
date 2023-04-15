@@ -7,7 +7,7 @@ import {
   Divider,
   useMediaQuery,
 } from "@mui/material";
-import { Box } from "@mui/system";
+
 import { PropertyList } from "src/components/property-list";
 import { PropertyListItem } from "src/components/property-list-item";
 

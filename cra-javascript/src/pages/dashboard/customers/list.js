@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import Download01Icon from "@untitled-ui/icons-react/build/esm/Download01";
 import PlusIcon from "@untitled-ui/icons-react/build/esm/Plus";
 import Upload01Icon from "@untitled-ui/icons-react/build/esm/Upload01";
 import {
@@ -17,7 +16,7 @@ import { useMounted } from "src/hooks/use-mounted";
 import { usePageView } from "src/hooks/use-page-view";
 import { useSelection } from "src/hooks/use-selection";
 import { CustomerListSearch } from "src/sections/dashboard/customer/customer-list-search";
-import { CustomerListTable } from "src/sections/dashboard/customer/customer-list-table";
+import { EmployeeListTable } from "src/sections/dashboard/customer/employee-list-table";
 
 const useCustomersSearch = () => {
   const [state, setState] = useState({
@@ -169,7 +168,7 @@ const Page = () => {
                 sortBy={customersSearch.state.sortBy}
                 sortDir={customersSearch.state.sortDir}
               />
-              <CustomerListTable
+              <EmployeeListTable
                 count={customersStore.customersCount}
                 items={customersStore.customers}
                 onDeselectAll={customersSelection.handleDeselectAll}

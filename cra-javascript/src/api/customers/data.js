@@ -22,9 +22,9 @@ export const customers = [
     totalOrders: 3,
     updatedAt: subDays(subHours(now, 7), 1).getTime(),
     createdAt: subDays(subHours(now, 1), 2).getTime(),
-    totalGrade: "99",
+    totalGrade: "97",
     gradeDetail: {
-      HOOD: "96",
+      HOOD: "20",
       CLAMP: "94",
       HC: "95",
     },
@@ -153,6 +153,33 @@ export const invoices = [
   },
   {
     id: "311658671JR",
+    issueDate: now.getTime(),
+    status: "unpaid",
+    amount: 1451.75,
+  },
+];
+
+export const taskLogs = [
+  {
+    id: "528651571NT",
+    task: "HOOD",
+    startDate: subDays(subHours(subMinutes(now, 49), 11), 4).getTime(),
+    endDate: now.getTime(),
+    taskLocation: "평택 1공장",
+    coopList: ["산토로와", "레녹스"],
+    coopNum: 8,
+    issueDate: now.getTime(),
+    status: "paid",
+    amount: 1358.75,
+  },
+  {
+    id: "311658671JR",
+    task: "CLAMP",
+    startDate: subDays(subHours(subMinutes(now, 49), 11), 7).getTime(),
+    endDate: now.getTime(),
+    coopNum: 7,
+    coopList: ["산토로와", "레녹스"],
+    taskLocation: "평택 2공장",
     issueDate: now.getTime(),
     status: "unpaid",
     amount: 1451.75,
