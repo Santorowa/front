@@ -11,7 +11,7 @@ const statusMap = {
   reservation: "warning",
 };
 
-export const CustomerBasicDetails = (props) => {
+export const EmployeeBasicDetails = (props) => {
   const {
     address1,
     address2,
@@ -34,7 +34,7 @@ export const CustomerBasicDetails = (props) => {
       <PropertyList>
         <PropertyListItem divider label="Email" value={email} />
         <PropertyListItem divider label="Phone" value={phone} />
-        <PropertyListItem divider label="State/Region" value={state} />
+        {/* <PropertyListItem divider label="State/Region" value={state} /> */}
         <PropertyListItem divider label="주소" value={address} />
         <PropertyListItem divider label="소속 회사" value={company} />
         <PropertyListItem divider label="입사일" value={cvCreatedAt} />
@@ -51,7 +51,7 @@ export const CustomerBasicDetails = (props) => {
   );
 };
 
-CustomerBasicDetails.propTypes = {
+EmployeeBasicDetails.propTypes = {
   address1: PropTypes.string,
   address2: PropTypes.string,
   country: PropTypes.string,

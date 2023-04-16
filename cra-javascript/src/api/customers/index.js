@@ -9,6 +9,7 @@ import {
   logs,
   messages,
   taskLogs,
+  employee,
 } from "./data";
 
 class CustomersApi {
@@ -78,6 +79,10 @@ class CustomersApi {
 
   getCustomer(request) {
     return Promise.resolve(deepCopy(customer));
+  }
+
+  getEmployee(request) {
+    return Promise.resolve(deepCopy(employee));
   }
 
   getEmails(request) {

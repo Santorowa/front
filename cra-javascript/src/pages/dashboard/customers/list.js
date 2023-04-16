@@ -15,7 +15,7 @@ import { Seo } from "src/components/seo";
 import { useMounted } from "src/hooks/use-mounted";
 import { usePageView } from "src/hooks/use-page-view";
 import { useSelection } from "src/hooks/use-selection";
-import { CustomerListSearch } from "src/sections/dashboard/customer/customer-list-search";
+import { EmployeeListSearch } from "src/sections/dashboard/customer/employee-list-search";
 import { EmployeeListTable } from "src/sections/dashboard/customer/employee-list-table";
 
 const useCustomersSearch = () => {
@@ -162,7 +162,7 @@ const Page = () => {
               </Stack>
             </Stack>
             <Card>
-              <CustomerListSearch
+              <EmployeeListSearch
                 onFiltersChange={customersSearch.handleFiltersChange}
                 onSortChange={customersSearch.handleSortChange}
                 sortBy={customersSearch.state.sortBy}

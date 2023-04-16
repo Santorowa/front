@@ -23,8 +23,8 @@ import { Seo } from "src/components/seo";
 import { useMounted } from "src/hooks/use-mounted";
 import { usePageView } from "src/hooks/use-page-view";
 import { paths } from "src/paths";
-import { CustomerBasicDetails } from "src/sections/dashboard/customer/customer-basic-details";
-import { CustomerDataManagement } from "src/sections/dashboard/customer/customer-data-management";
+import { EmployeeBasicDetails } from "src/sections/dashboard/customer/employee-basic-details";
+import { EmployeeDataManagement } from "src/sections/dashboard/customer/employee-data-management";
 import { EmployeeSmsKakaoSummary } from "src/sections/dashboard/customer/employee-sms-kakao-summary";
 import { EmployeeTaskLogs } from "src/sections/dashboard/customer/employee-task-logs";
 import { EmployeeGrade } from "src/sections/dashboard/customer/employee-grade";
@@ -237,7 +237,7 @@ const Page = () => {
               <div>
                 <Grid container spacing={4}>
                   <Grid xs={12} lg={4}>
-                    <CustomerBasicDetails
+                    <EmployeeBasicDetails
                       address1={customer.address1}
                       address2={customer.address2}
                       country={customer.country}
@@ -257,7 +257,7 @@ const Page = () => {
                         gradedetail={customer.gradeDetail}
                       />
                       <EmployeeSmsKakaoSummary />
-                      <CustomerDataManagement />
+                      <EmployeeDataManagement />
                     </Stack>
                   </Grid>
                 </Grid>

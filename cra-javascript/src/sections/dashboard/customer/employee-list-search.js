@@ -174,7 +174,7 @@ const state = [
   },
 ];
 
-export const CustomerListSearch = (props) => {
+export const EmployeeListSearch = (props) => {
   const { onFiltersChange, onSortChange, sortBy, sortDir } = props;
   const queryRef = useRef(null);
   const [currentTab, setCurrentTab] = useState("all");
@@ -358,7 +358,7 @@ export const CustomerListSearch = (props) => {
   );
 };
 
-CustomerListSearch.propTypes = {
+EmployeeListSearch.propTypes = {
   onFiltersChange: PropTypes.func,
   onSortChange: PropTypes.func,
   sortBy: PropTypes.string,

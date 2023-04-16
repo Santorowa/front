@@ -69,8 +69,6 @@ export const EmployeeListTable = (props) => {
     selected = [],
   } = props;
 
-  console.log(items);
-
   const selectedSome = selected.length > 0 && selected.length < items.length;
   const selectedAll = items.length > 0 && selected.length === items.length;
   const enableBulkActions = selected.length > 0;

@@ -1,57 +1,68 @@
-import { useCallback, useEffect, useState } from 'react';
-import ArrowLeftIcon from '@untitled-ui/icons-react/build/esm/ArrowLeft';
-import { Avatar, Box, Chip, Container, Link, Stack, SvgIcon, Typography } from '@mui/material';
-import { customersApi } from 'src/api/customers';
-import { RouterLink } from 'src/components/router-link';
-import { Seo } from 'src/components/seo';
-import { useMounted } from 'src/hooks/use-mounted';
-import { usePageView } from 'src/hooks/use-page-view';
-import { paths } from 'src/paths';
-import { CustomerEditForm } from 'src/sections/dashboard/customer/customer-edit-form';
-import { getInitials } from 'src/utils/get-initials';
+import { useCallback, useEffect, useState } from "react";
+import ArrowLeftIcon from "@untitled-ui/icons-react/build/esm/ArrowLeft";
+import {
+  Avatar,
+  Box,
+  Chip,
+  Container,
+  Link,
+  Stack,
+  SvgIcon,
+  Typography,
+} from "@mui/material";
+import { customersApi } from "src/api/customers";
+import { RouterLink } from "src/components/router-link";
+import { Seo } from "src/components/seo";
+import { useMounted } from "src/hooks/use-mounted";
+import { usePageView } from "src/hooks/use-page-view";
+import { paths } from "src/paths";
+import { EmployeeEditForm } from "src/sections/dashboard/customer/employee-edit-form";
+import { getInitials } from "src/utils/get-initials";
 
-const useCustomer = () => {
+const useEmployee = () => {
   const isMounted = useMounted();
-  const [customer, setCustomer] = useState(null);
+  const [employee, setEmployee] = useState(null);
 
-  const handleCustomerGet = useCallback(async () => {
+  const handleEmployeeGet = useCallback(async () => {
     try {
-      const response = await customersApi.getCustomer();
+      const response = await customersApi.getEmployee();
 
       if (isMounted()) {
-        setCustomer(response);
+        setEmployee(response);
       }
     } catch (err) {
       console.error(err);
     }
   }, [isMounted]);
 
-  useEffect(() => {
-      handleCustomerGet();
+  useEffect(
+    () => {
+      handleEmployeeGet();
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    []);
+    []
+  );
 
-  return customer;
+  return employee;
 };
 
 const Page = () => {
-  const customer = useCustomer();
+  const employee = useEmployee();
 
   usePageView();
 
-  if (!customer) {
+  if (!employee) {
     return null;
   }
 
   return (
     <>
-      <Seo title="Dashboard: Customer Edit" />
+      <Seo title="Dashboard: Employee Edit" />
       <Box
         component="main"
         sx={{
           flexGrow: 1,
-          py: 8
+          py: 8,
         }}
       >
         <Container maxWidth="lg">
@@ -63,64 +74,47 @@ const Page = () => {
                   component={RouterLink}
                   href={paths.dashboard.customers.index}
                   sx={{
-                    alignItems: 'center',
-                    display: 'inline-flex'
+                    alignItems: "center",
+                    display: "inline-flex",
                   }}
                   underline="hover"
                 >
                   <SvgIcon sx={{ mr: 1 }}>
                     <ArrowLeftIcon />
                   </SvgIcon>
-                  <Typography variant="subtitle2">
-                    Customers
-                  </Typography>
+                  <Typography variant="subtitle2">Employee</Typography>
                 </Link>
               </div>
               <Stack
                 alignItems="flex-start"
                 direction={{
-                  xs: 'column',
-                  md: 'row'
+                  xs: "column",
+                  md: "row",
                 }}
                 justifyContent="space-between"
                 spacing={4}
               >
-                <Stack
-                  alignItems="center"
-                  direction="row"
-                  spacing={2}
-                >
+                <Stack alignItems="center" direction="row" spacing={2}>
                   <Avatar
-                    src={customer.avatar}
+                    src={employee.avatar}
                     sx={{
                       height: 64,
-                      width: 64
+                      width: 64,
                     }}
                   >
-                    {getInitials(customer.name)}
+                    {getInitials(employee.name)}
                   </Avatar>
                   <Stack spacing={1}>
-                    <Typography variant="h4">
-                      {customer.email}
-                    </Typography>
-                    <Stack
-                      alignItems="center"
-                      direction="row"
-                      spacing={1}
-                    >
-                      <Typography variant="subtitle2">
-                        user_id:
-                      </Typography>
-                      <Chip
-                        label={customer.id}
-                        size="small"
-                      />
+                    <Typography variant="h4">{employee.email}</Typography>
+                    <Stack alignItems="center" direction="row" spacing={1}>
+                      <Typography variant="subtitle2">user_id:</Typography>
+                      <Chip label={employee.id} size="small" />
                     </Stack>
                   </Stack>
                 </Stack>
               </Stack>
             </Stack>
-            <CustomerEditForm customer={customer} />
+            <EmployeeEditForm customer={employee} />
           </Stack>
         </Container>
       </Box>

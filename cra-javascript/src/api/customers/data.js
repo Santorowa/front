@@ -87,6 +87,35 @@ export const customers = [
 ];
 
 // 고객 1명에 대한 객체
+export const employee = {
+  id: "EP0001",
+  city: "서울",
+  state: "마포구",
+  street: "잔다리로 102",
+  address1: "서울시 마포구",
+  address2: "잔다리로 102",
+  avatar: "/assets/avatars/avatar-miron-vitold.png",
+  balance: 0,
+  country: "USA",
+  currency: "$",
+  email: "ycn0127@naver.com",
+  hasDiscount: false,
+  isVerified: true,
+  name: "Santorowa",
+  phone: "010-5283-6780",
+  vatRate: 19,
+  zipCode: "04002",
+  company: "Co. Santo",
+  status: "working",
+  createdAt: subDays(subHours(now, 1), 2).getTime(),
+  totalGrade: "100", // 백엔드에서 평균 산출
+  gradeDetail: {
+    HOOD: "100",
+    CLAMP: "80",
+    HC: "40",
+  },
+};
+
 export const customer = {
   id: "EP0001",
   city: "서울",
