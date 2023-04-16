@@ -10,7 +10,7 @@ import {
   SvgIcon,
   Typography,
 } from "@mui/material";
-import { customersApi } from "src/api/customers";
+import { employeesApi } from "src/api/customers";
 import { Seo } from "src/components/seo";
 import { useMounted } from "src/hooks/use-mounted";
 import { usePageView } from "src/hooks/use-page-view";
@@ -79,7 +79,7 @@ const useCustomersStore = (searchState) => {
 
   const handleCustomersGet = useCallback(async () => {
     try {
-      const response = await customersApi.getCustomers(searchState);
+      const response = await employeesApi.getEmployees(searchState);
 
       if (isMounted()) {
         setState({

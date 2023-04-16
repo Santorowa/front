@@ -86,7 +86,7 @@ export const customers = [
   },
 ];
 
-// 고객 1명에 대한 객체
+// 직원 1명에 대한 객체
 export const employee = {
   id: "EP0001",
   city: "서울",
@@ -94,6 +94,7 @@ export const employee = {
   street: "잔다리로 102",
   address1: "서울시 마포구",
   address2: "잔다리로 102",
+  etcAdress: "205호",
   avatar: "/assets/avatars/avatar-miron-vitold.png",
   balance: 0,
   country: "USA",
@@ -106,7 +107,7 @@ export const employee = {
   vatRate: 19,
   zipCode: "04002",
   company: "Co. Santo",
-  status: "working",
+  status: "reservation",
   createdAt: subDays(subHours(now, 1), 2).getTime(),
   totalGrade: "100", // 백엔드에서 평균 산출
   gradeDetail: {

@@ -16,7 +16,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { customersApi } from "src/api/customers";
+import { employeesApi } from "src/api/customers";
 import { useMounted } from "src/hooks/use-mounted";
 
 const sendOptions = [
@@ -31,7 +31,7 @@ const useMessages = () => {
 
   const handleMessagesGet = useCallback(async () => {
     try {
-      const response = await customersApi.getMessages();
+      const response = await employeesApi.getMessages();
 
       if (isMounted()) {
         setMessages(response);

@@ -10,7 +10,7 @@ import {
   SvgIcon,
   Typography,
 } from "@mui/material";
-import { customersApi } from "src/api/customers";
+import { employeesApi } from "src/api/customers";
 import { RouterLink } from "src/components/router-link";
 import { Seo } from "src/components/seo";
 import { useMounted } from "src/hooks/use-mounted";
@@ -25,7 +25,7 @@ const useEmployee = () => {
 
   const handleEmployeeGet = useCallback(async () => {
     try {
-      const response = await customersApi.getEmployee();
+      const response = await employeesApi.getEmployee();
 
       if (isMounted()) {
         setEmployee(response);
@@ -114,7 +114,7 @@ const Page = () => {
                 </Stack>
               </Stack>
             </Stack>
-            <EmployeeEditForm customer={employee} />
+            <EmployeeEditForm employee={employee} />
           </Stack>
         </Container>
       </Box>

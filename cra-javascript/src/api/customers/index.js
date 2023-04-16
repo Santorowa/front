@@ -12,8 +12,8 @@ import {
   employee,
 } from "./data";
 
-class CustomersApi {
-  getCustomers(request = {}) {
+class EmployeeApi {
+  getEmployees(request = {}) {
     const { filters, page, rowsPerPage, sortBy, sortDir } = request;
 
     let data = deepCopy(customers);
@@ -106,4 +106,4 @@ class CustomersApi {
   }
 }
 
-export const customersApi = new CustomersApi();
+export const employeesApi = new EmployeeApi();

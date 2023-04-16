@@ -17,7 +17,7 @@ import {
   Typography,
   Unstable_Grid2 as Grid,
 } from "@mui/material";
-import { customersApi } from "src/api/customers";
+import { employeesApi } from "src/api/customers";
 import { RouterLink } from "src/components/router-link";
 import { Seo } from "src/components/seo";
 import { useMounted } from "src/hooks/use-mounted";
@@ -43,7 +43,7 @@ const useCustomer = () => {
 
   const handleCustomerGet = useCallback(async () => {
     try {
-      const response = await customersApi.getCustomer();
+      const response = await employeesApi.getEmployee();
 
       if (isMounted()) {
         setCustomer(response);
@@ -70,7 +70,7 @@ const useTaskLogs = () => {
 
   const handleInvoicesGet = useCallback(async () => {
     try {
-      const response = await customersApi.getTaskLogs();
+      const response = await employeesApi.getTaskLogs();
 
       if (isMounted()) {
         setInvoices(response);
@@ -97,7 +97,7 @@ const useLogs = () => {
 
   const handleLogsGet = useCallback(async () => {
     try {
-      const response = await customersApi.getLogs();
+      const response = await employeesApi.getLogs();
 
       if (isMounted()) {
         setLogs(response);
