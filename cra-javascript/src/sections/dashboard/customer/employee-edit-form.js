@@ -3,21 +3,28 @@ import {
   Card,
   CardContent,
   CardHeader,
-  Divider,
   Unstable_Grid2 as Grid,
+  Modal,
   Stack,
-  Switch,
+  SvgIcon,
   TextField,
-  Typography,
 } from "@mui/material";
+import SearchMdIcon from "@untitled-ui/icons-react/build/esm/SearchMd";
 import { useFormik } from "formik";
 import PropTypes from "prop-types";
 import toast from "react-hot-toast";
 import { RouterLink } from "src/components/router-link";
-import { SeverityPill } from "src/components/severity-pill";
 import { paths } from "src/paths";
 import { wait } from "src/utils/wait";
 import * as Yup from "yup";
+import SearchIcon from "@mui/icons-material/Search";
+import { Box } from "@mui/system";
+import { useState } from "react";
+import Post from "src/components/post";
+import PopupPostCode from "src/components/post";
+import PopupDom from "src/components/popupDom";
+// import Postcode from "@actbase/react-daum-postcode";
+import DaumPostcode from "react-daum-postcode";
 
 const statusMap = {
   working: "error",
@@ -89,6 +96,36 @@ export const EmployeeEditForm = (props) => {
     },
   });
 
+  const [enroll_company, setEnroll_company] = useState({
+    address: "",
+  });
+
+  const [popup, setPopup] = useState(false);
+
+  const handleInput = (e) => {
+    setEnroll_company({
+      ...enroll_company,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleComplete = (data) => {
+    setPopup(!popup);
+  };
+
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  // 팝업창 열기
+  const openPostCode = () => {
+    setIsPopupOpen(true);
+  };
+
+  // 팝업창 닫기
+  const closePostCode = () => {
+    setIsPopupOpen(false);
+  };
+
+  const [isModal, setModal] = useState(false);
   return (
     <form onSubmit={formik.handleSubmit} {...other}>
       <Card>
@@ -121,41 +158,45 @@ export const EmployeeEditForm = (props) => {
                 value={formik.values.email}
               />
             </Grid>
-            {/* <Grid xs={12} md={6}>
-              <TextField
-                error={!!(formik.touched.country && formik.errors.country)}
-                fullWidth
-                helperText={formik.touched.country && formik.errors.country}
-                label="Country"
-                name="country"
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-                value={formik.values.country}
-              />
-            </Grid> */}
-            {/* <Grid xs={12} md={6}>
-              <TextField
-                error={!!(formik.touched.state && formik.errors.state)}
-                fullWidth
-                helperText={formik.touched.state && formik.errors.state}
-                label="State/Region"
-                name="state"
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-                value={formik.values.state}
-              />
-            </Grid> */}
+
             <Grid xs={12} md={6}>
               <TextField
                 error={!!(formik.touched.address1 && formik.errors.address1)}
-                fullWidth
+                sx={{ width: "80%" }}
                 helperText={formik.touched.address1 && formik.errors.address1}
                 label="Address 1"
                 name="address1"
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
                 value={formik.values.address1}
-              />
+              ></TextField>
+
+              <Box
+                m={1}
+                display="inline-flex"
+                justifyContent="center"
+                alignItems="center"
+              >
+                <div className="address_search">
+                  <Button
+                    startIcon={
+                      <SvgIcon>
+                        <SearchIcon />
+                      </SvgIcon>
+                    }
+                    onClick={handleComplete}
+                    // size="large"
+                    variant="contained"
+                  ></Button>
+
+                  {popup && (
+                    <Post
+                    // company={enroll_company}
+                    // setcompany={setEnroll_company}
+                    ></Post>
+                  )}
+                </div>
+              </Box>
             </Grid>
             <Grid xs={12} md={6}>
               <TextField
